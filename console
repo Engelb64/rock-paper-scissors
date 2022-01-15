@@ -3,7 +3,16 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$app = new Symfony\Component\Console\Application('Rock, Paper, Scissors', '1.0.0');
-$app->add(new Uniqoders\Game\Console\GameCommand);
+use Symfony\Component\Console\Application;
+use Uniqoders\Game\Console\GameCommand;
 
-$app->run();
+/**
+ * Error handling
+ */
+try {
+    $app = new Application('Rock, Paper, Scissors', '1.0.0');
+    $app->add(new GameCommand);
+    $app->run();
+} catch (\Throwable $th) {
+    print_r($th);
+}
